@@ -1,6 +1,5 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { AppLoading } from 'expo-app-loading';
 import { theme } from './src/infrastructure/theme';
 import { ThemeProvider } from 'styled-components/native';
 
