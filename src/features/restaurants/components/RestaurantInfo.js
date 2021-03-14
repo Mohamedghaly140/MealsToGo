@@ -5,7 +5,7 @@ import { SvgXml } from 'react-native-svg';
 import star from '../../../../assets/star';
 import open from '../../../../assets/open';
 import { View, Text, Image } from 'react-native';
-import { Spacer } from '../../../components/Spacer';
+import Spacer from '../../../components/Spacer';
 
 const Title = styled.Text`
   font-family: ${props => props.theme.fonts.heading};
