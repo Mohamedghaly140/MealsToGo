@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StatusBar, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import { Searchbar } from 'react-native-paper';
 
 import RestaurantInfo from '../components/RestaurantInfo';
 import Spacer from '../../../components/Spacer';
+
+import { RestaurantsContext } from '../../../services/restaurants/context';
 
 const SafeArea = styled.SafeAreaView`
   flex: 1;
@@ -22,26 +24,17 @@ const ListContainer = styled(FlatList).attrs({
 })``;
 
 const Restaurant = () => {
+  const restaurantsContext = useContext(RestaurantsContext);
+
+  const { restaurants } = restaurantsContext;
+
   return (
     <SafeArea>
       <SearchContainer>
         <Searchbar />
       </SearchContainer>
       <ListContainer
-        data={[
-          { name: 2 },
-          { name: 3 },
-          { name: 4 },
-          { name: 5 },
-          { name: 6 },
-          { name: 7 },
-          { name: 8 },
-          { name: 9 },
-          { name: 10 },
-          { name: 11 },
-          { name: 12 },
-          { name: 13 },
-        ]}
+        data={restaurants}
         keyExtractor={item => item.name}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (

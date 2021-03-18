@@ -7,6 +7,9 @@ import { ThemeProvider } from 'styled-components/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+// Context Golbal State
+import { RestaurantsContextProvider } from './src/services/restaurants/context';
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -69,19 +72,21 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              activeTintColor: 'tomato',
-              inactiveTintColor: 'gray',
-            }}
-          >
-            <Tab.Screen name='Restaurant' component={RestaurantScreen} />
-            <Tab.Screen name='Map' component={MapScreen} />
-            <Tab.Screen name='Settings' component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={createScreenOptions}
+              tabBarOptions={{
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+              }}
+            >
+              <Tab.Screen name='Restaurant' component={RestaurantScreen} />
+              <Tab.Screen name='Map' component={MapScreen} />
+              <Tab.Screen name='Settings' component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <StatusBar style='auto' />
     </>
