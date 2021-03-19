@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StatusBar, FlatList } from 'react-native';
 import styled from 'styled-components/native';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, ActivityIndicator, Colors } from 'react-native-paper';
 
 import RestaurantInfo from '../components/RestaurantInfo';
 import Spacer from '../../../components/Spacer';
@@ -17,6 +17,12 @@ const SearchContainer = styled.View`
   padding: ${props => props.theme.space[3]};
 `;
 
+const CenteredContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ListContainer = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 16,
@@ -26,7 +32,19 @@ const ListContainer = styled(FlatList).attrs({
 const Restaurant = () => {
   const restaurantsContext = useContext(RestaurantsContext);
 
-  const { restaurants } = restaurantsContext;
+  const { restaurants, isLoading, error } = restaurantsContext;
+
+  if (isLoading) {
+    return (
+      <CenteredContainer>
+        <ActivityIndicator
+          size='large'
+          animating={true}
+          color={Colors.blue500}
+        />
+      </CenteredContainer>
+    );
+  }
 
   return (
     <SafeArea>
@@ -39,7 +57,7 @@ const Restaurant = () => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <Spacer position='bottom' size='large'>
-            <RestaurantInfo />
+            <RestaurantInfo restaurant={item} />
           </Spacer>
         )}
       />
