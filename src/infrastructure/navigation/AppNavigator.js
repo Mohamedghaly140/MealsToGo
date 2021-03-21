@@ -43,8 +43,8 @@ const AppNavigator = () => (
       }}
     >
       <Tab.Screen name='Restaurants' component={RestaurantsNavigator} />
-      <Tab.Screen name='Settings' component={Settings} />
       <Tab.Screen name='Map' component={MapScreen} />
+      <Tab.Screen name='Settings' component={Settings} />
     </Tab.Navigator>
   </NavigationContainer>
 );
