@@ -1,43 +1,72 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components/native';
-import { ActivityIndicator, Colors } from 'react-native-paper';
+import React, { useState } from 'react';
+import { ScrollView } from 'react-native';
+import { List } from 'react-native-paper';
 
 import RestaurantInfo from '../components/RestaurantInfo';
 import Spacer from '../../../components/Spacer';
 import SafeArea from '../../../components/SafeArea';
 
-import { RestaurantsContext } from '../../../services/restaurants/context';
+const RestaurantDetail = ({ route }) => {
+  const [breakfastExpanded, setBreakfastExpanded] = useState(false);
+  const [lunchExpanded, setLunchExpanded] = useState(false);
+  const [dinnerExpanded, setDinnerExpanded] = useState(false);
+  const [drinksExpanded, setDrinksExpanded] = useState(false);
 
-const CenteredContainer = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const RestaurantDetail = ({ navigation, route }) => {
   const { restaurant } = route.params;
-
-  const restaurantsContext = useContext(RestaurantsContext);
-
-  const { restaurants, isLoading, error } = restaurantsContext;
-
-  if (isLoading || !restaurant) {
-    return (
-      <CenteredContainer>
-        <ActivityIndicator
-          size='large'
-          animating={true}
-          color={Colors.blue500}
-        />
-      </CenteredContainer>
-    );
-  }
 
   return (
     <SafeArea>
       <Spacer position='bottom' size='large'>
         <RestaurantInfo restaurant={restaurant} />
       </Spacer>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <List.Section title='Meal Ingredietns -'>
+          <List.Accordion
+            title='Breakfast'
+            left={props => <List.Icon {...props} icon='bread-slice' />}
+            expanded={breakfastExpanded}
+            onPress={() => setBreakfastExpanded(!breakfastExpanded)}
+          >
+            <List.Item title='Eggs Benedict' />
+            <List.Item title='Classic Breakfast' />
+          </List.Accordion>
+
+          <List.Accordion
+            title='Lunch'
+            left={props => <List.Icon {...props} icon='hamburger' />}
+            expanded={lunchExpanded}
+            onPress={() => setLunchExpanded(!lunchExpanded)}
+          >
+            <List.Item title='Burger w/ Fries' />
+            <List.Item title='Steak Sandwich' />
+            <List.Item title='Mushroom Soup' />
+          </List.Accordion>
+
+          <List.Accordion
+            title='Dinner'
+            left={props => <List.Icon {...props} icon='food-variant' />}
+            expanded={dinnerExpanded}
+            onPress={() => setDinnerExpanded(!dinnerExpanded)}
+          >
+            <List.Item title='Spaghetti Bolognese' />
+            <List.Item title='Veal Cutlet with Chicken Mushroom Rotini' />
+            <List.Item title='Steak Frites' />
+          </List.Accordion>
+
+          <List.Accordion
+            title='Drinks'
+            left={props => <List.Icon {...props} icon='cup' />}
+            expanded={drinksExpanded}
+            onPress={() => setDrinksExpanded(!drinksExpanded)}
+          >
+            <List.Item title='Coffee' />
+            <List.Item title='Tea' />
+            <List.Item title='Modelo' />
+            <List.Item title='Coke' />
+            <List.Item title='Fanta' />
+          </List.Accordion>
+        </List.Section>
+      </ScrollView>
     </SafeArea>
   );
 };
