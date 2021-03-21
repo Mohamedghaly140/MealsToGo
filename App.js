@@ -40,8 +40,6 @@ const Tab = createBottomTabNavigator();
 
 const isAndroid = Platform.OS === 'android';
 
-console.log(isAndroid);
-
 const TAB_ICON = {
   Restaurant: isAndroid ? 'md-restaurant' : 'ios-restaurant',
   Map: isAndroid ? 'md-map' : 'ios-map',

@@ -31,7 +31,7 @@ const Restaurant = () => {
 
   const { restaurants, isLoading, error } = restaurantsContext;
 
-  if (isLoading) {
+  if (isLoading || !restaurants) {
     return (
       <CenteredContainer>
         <ActivityIndicator
