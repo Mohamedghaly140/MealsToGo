@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components/native';
 // Context Golbal State
 import { RestaurantsContextProvider } from './src/services/restaurants/context';
 import { LocationContextProvider } from './src/services/location/context';
+import { FavouritesContextProvider } from './src/services/favourites/context';
 
 import {
   useFonts as useOswald,
@@ -32,11 +33,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <MainNavigation />
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
+        <FavouritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <MainNavigation />
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
+        </FavouritesContextProvider>
       </ThemeProvider>
       <StatusBar style='auto' />
     </>
