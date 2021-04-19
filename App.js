@@ -2,11 +2,13 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { theme } from './src/infrastructure/theme';
 import { ThemeProvider } from 'styled-components/native';
+import * as firebase from 'firebase';
 
 // Context Golbal State
 import { RestaurantsContextProvider } from './src/services/restaurants/context';
 import { LocationContextProvider } from './src/services/location/context';
 import { FavouritesContextProvider } from './src/services/favourites/context';
+import { AuthenticationContextProvider } from './src/services/authentication/context';
 
 import {
   useFonts as useOswald,
@@ -16,6 +18,19 @@ import { useFonts as useLato, Lato_400Regular } from '@expo-google-fonts/lato';
 
 // Navigation
 import MainNavigation from './src/infrastructure/navigation';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDWgYP0PoAxp1azrw-rp1bfXtj7bIi8zXk',
+  authDomain: 'mealstogo-app.firebaseapp.com',
+  projectId: 'mealstogo-app',
+  storageBucket: 'mealstogo-app.appspot.com',
+  messagingSenderId: '549357243069',
+  appId: '1:549357243069:web:29f035b9b1a59a2fe285d4',
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -33,13 +48,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <MainNavigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <MainNavigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style='auto' />
     </>
