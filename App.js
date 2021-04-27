@@ -5,9 +5,6 @@ import { ThemeProvider } from 'styled-components/native';
 import * as firebase from 'firebase';
 
 // Context Golbal State
-import { RestaurantsContextProvider } from './src/services/restaurants/context';
-import { LocationContextProvider } from './src/services/location/context';
-import { FavouritesContextProvider } from './src/services/favourites/context';
 import { AuthenticationContextProvider } from './src/services/authentication/context';
 
 import {
@@ -49,13 +46,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <MainNavigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <MainNavigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style='auto' />
