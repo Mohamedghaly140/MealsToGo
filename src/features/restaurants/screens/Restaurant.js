@@ -8,6 +8,7 @@ import RestaurantInfo from '../components/RestaurantInfo';
 import Spacer from '../../../components/Spacer';
 import SafeArea from '../../../components/SafeArea';
 import FavouritesBar from '../../../components/FavouritesBar';
+import FadeInView from '../../../components/animations/FadeIn';
 
 import { RestaurantsContext } from '../../../services/restaurants/context';
 import { FavouritesContext } from '../../../services/favourites/context';
@@ -69,7 +70,9 @@ const Restaurant = ({ navigation }) => {
             }
           >
             <Spacer position='bottom' size='large'>
-              <RestaurantInfo restaurant={item} />
+              <FadeInView>
+                <RestaurantInfo restaurant={item} />
+              </FadeInView>
             </Spacer>
           </TouchableOpacity>
         )}
